@@ -1,0 +1,94 @@
+html, body {
+    height: 100vh;
+}
+
+form {
+    margin: 0;
+}
+
+.main-content {
+    background: #111111;
+    height: calc(100vh - 56px);
+}
+
+@media only screen and (min-width: 601px) {
+    .main-content {
+        height: calc(100vh - 64px);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    nav .brand-logo {
+        left: 10px;
+         -webkit-transform: translateX(0); 
+        transform: translateX(0); 
+    }
+}
+
+.chat-container {
+    height: 90%;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+}
+
+.chat-item-box {
+    width: 65%;
+    max-width: 300px;
+    padding: 7px;
+    font-size: 1.15em;
+    line-height: 1.2em;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.chat-item-other {
+    margin-left: 10px;
+}
+
+.chat-item-self {
+    float: right;
+    margin-right: 10px;
+}
+
+.chat-item-info {
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: #EFEFEF;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-container {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.chat-box-container {
+    padding: 0 10px;
+    width: 95%;
+}
+
+#chat-box {
+    font-size: 1.5em;
+    color: white;
+}
+
+#chat-box:focus {
+    box-shadow: none;
+    border-bottom: 1px solid #9e9e9e;
+}
+
+.send > i {
+    font-size: 2em;
+}
+
+.send:focus {
+    background: none;
+}
+
+.selection-icon {
+    margin-left: 20px;
+}

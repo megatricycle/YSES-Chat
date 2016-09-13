@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>YSES Chat</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="/materialize.min.css">
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div id="app" v-on:click="inputFocus">
+            <navbar
+                :selection-mode="chatSelected"
+                :delete-chat="handleDeleteChat"
+                :start-edit="startEdit"
+                :state = "state"
+            ></navbar>
+            <div class="main-content">
+                <chat-container
+                    :chat-messages="chatMessages"
+                    :click-chat="handleClickChat"
+                    :chat-selected="chatSelected"
+                    :user="user"
+                >
+                </chat-container>
+                <input-container
+                    :add-chat="handleAddChat"
+                    :clear-selection="handleClearSelection"
+                ></input-container>
+            </div>
+        </div>
+        
+        <template id="navbar">
+            <div class="navbar-fixed">
+                <nav class="grey darken-3 fixed">
+                    <div class="row">
+                        <div class="col s12 nav-wrapper logo">
+                            <a href="#" class="brand-logo waves-effect waves-light">YSES Chat</a>
+                            <a
+                                href="#"
+                                class="right waves-effect waves-light selection-icon"
+                                v-if="selectionMode && state !== 'edit'"
+                                v-on:click="startEdit"
+                            >
+                                <i class="mdi-editor-mode-edit white-text"></i>
+                            </a>
+                            <a
+                                href="#"
+                                class="right waves-effect waves-light selection-icon"
+                                v-if="selectionMode && state !== 'edit'"
+                                v-on:click="deleteChat(selectionMode)"
+                            >
+                                <i class="mdi-action-delete white-text"></i>
+                            </a>
+                            <a
+                                href="#"
+                                class="right waves-effect waves-light selection-icon"
+                                v-if="state === 'edit'"
+                            >
+                                <i class="mdi-editor-mode-edit white-text"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </template>
+        
+        <template id="chat-container">
+            <div
+                class="chat-container"
+            >
+                <chat-item
+                    v-for="chat in chatMessages | reverse"
+                    :id="chat.id"
+                    :sender="chat.sender"
+                    :is-self="chat.sender === user"
+                    :is-edited="chat.isEdited"
+                    :click-chat="clickChat"
+                    :is-being-edited="chatSelected === chat.id"
+                >
+                    {{chat.message}}
+                </chat-item>
+            </div>
+        </template>
+        
+        <template id="input-container">
+            <form v-on:submit.prevent="addChat">
+                <div class="input-container">
+                    <div class="chat-box-container">
+                        <input
+                            id="chat-box"
+                            type="text"
+                            placeholder="Message YSERs"
+                            autocomplete="off"
+                            v-on:click="clearSelection"
+                        />
+                    </div>
+                    <button href="#" class="btn-flat waves-effect waves-light send" type="submit">
+                        <i class="mdi-content-send white-text"></i>
+                    </button>
+                </div>
+            </form>
+        </template>
+        
+        <template id="chat-item">
+            <div class="chat-item">
+                <div
+                    class="chat-item-box white-text"
+                    :class="{
+                        'chat-item-self': isSelf,
+                        'grey darken-3': isSelf && !isBeingEdited,
+                        'chat-item-other': !isSelf,
+                        'blue darken-4': !isSelf && !isBeingEdited,
+                        'yellow darken-2': isBeingEdited 
+                    }"
+                    v-on:click="clickChat(id)"
+                >
+                    <div class="chat-item-text">
+                        <slot></slot>
+                    </div>
+                    <div class="chat-item-info">
+                        <span>{{sender}}</span>
+                        <span>
+                            <span v-if="isEdited">* </span>
+                            9:32 PM
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <script src="/vue.js"></script>
+        <script src="/app.js"></script>
+    </body>
+</html> 
+
+   
