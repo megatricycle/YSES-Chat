@@ -33,7 +33,7 @@ var store = {
         isEdited: false
     }],
     user: 'User',
-    isLoading: true,
+    isLoading: false,
     state: 'normal', // state: normal, edit
     chatSelected: null
 };
@@ -88,13 +88,18 @@ var InputContainer = Vue.extend({
     ]
 });
 
+var LoadingScreen = Vue.extend({
+    template: '#loading-screen'
+});
+
 var App = new Vue({
     el: '#app',
     data: store,
     components: {
         'navbar': Navbar,
         'chat-container': ChatContainer,
-        'input-container': InputContainer
+        'input-container': InputContainer,
+        'loading-screen': LoadingScreen
     },
     methods: {
         addChat: function(sender, message) {
@@ -141,7 +146,7 @@ var App = new Vue({
         handleAddChat: function() {
             var message = document.querySelector('#chat-box').value;
             
-            if (!message) return; 
+            if(!message) return; 
             
             document.querySelector('#chat-box').value = '';
             
@@ -173,7 +178,9 @@ var App = new Vue({
             }
         },
         inputFocus: function() {
-            document.querySelector('#chat-box').focus()
+            if(!this.isLoading) {
+                document.querySelector('#chat-box').focus()
+            }
         }
     },
     ready: function() {

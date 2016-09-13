@@ -7,13 +7,18 @@
     </head>
     <body>
         <div id="app" v-on:click="inputFocus">
+            <loading-screen v-if="isLoading"></loading-screen>
             <navbar
                 :selection-mode="chatSelected"
                 :delete-chat="handleDeleteChat"
                 :start-edit="startEdit"
                 :state = "state"
+                v-if="!isLoading"
             ></navbar>
-            <div class="main-content">
+            <div
+                class="main-content"
+                v-if="!isLoading"
+            >
                 <chat-container
                     :chat-messages="chatMessages"
                     :click-chat="handleClickChat"
@@ -27,6 +32,13 @@
                 ></input-container>
             </div>
         </div>
+        
+        <template id="loading-screen">
+            <div id="load-screen">
+                <img class="yses-logo" src="/yses_logo.png"/>
+                <p class="white-text loading-text">Loading...</p>
+            </div>
+        </template>
         
         <template id="navbar">
             <div class="navbar-fixed">
