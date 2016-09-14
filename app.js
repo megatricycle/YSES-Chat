@@ -1,3 +1,9 @@
+/*
+    Don't worry if you don't know Vue.js! You don't need a full understanding to do this tutorial.
+    
+    You only need to focus on Firebase.
+*/
+
 var Vue = window.Vue;
 
 var store = {
@@ -38,12 +44,13 @@ var store = {
     chatSelected: null
 };
 
-// store.user = prompt('Username:');
-store.user = 'Peter';
+store.user = prompt('Username:');
 
 Vue.filter('reverse', function(value) {
     return value.slice().reverse();
 });
+
+// Here we declare all components that will be used in our app.
 
 var Navbar = Vue.extend({
     template: '#navbar',
@@ -91,6 +98,8 @@ var InputContainer = Vue.extend({
 var LoadingScreen = Vue.extend({
     template: '#loading-screen'
 });
+
+// Our main application root, most of our logic resides here
 
 var App = new Vue({
     el: '#app',
@@ -183,7 +192,14 @@ var App = new Vue({
             }
         }
     },
+    created: function() {
+        // Put your logic here on application load.
+        
+        // NOTE: DOM is not yet rendered at this stage!
+    },
     ready: function() {
+        // DOM is now loaded.
+        
         this.inputFocus();
     }
 });
