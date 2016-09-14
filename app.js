@@ -7,37 +7,7 @@
 var Vue = window.Vue;
 
 var store = {
-    chatMessages: [{
-        id: '1',
-        sender: 'User',
-        message: 'Hello world :)',
-        isEdited: false
-    }, {
-        id: '2',
-        sender: 'Peter',
-        message: 'Test',
-        isEdited: true
-    }, {
-        id: '3',
-        sender: 'Peter',
-        message: ':)',
-        isEdited: false
-    }, {
-        id: '4',
-        sender: 'Peter',
-        message: ':P',
-        isEdited: false
-    }, {
-        id: '5',
-        sender: 'Leah',
-        message: 'Hiii!',
-        isEdited: false
-    }, {
-        id: '6',
-        sender: 'Peter',
-        message: ':))',
-        isEdited: false
-    }],
+    chatMessages: [],
     user: 'User',
     isLoading: false,
     state: 'normal', // state: normal, edit
